@@ -1,5 +1,15 @@
 {
+  "scripts": {
+    "test": "turbo run test",
+    "build": "turbo run build"
+  },
+  "private": true,
   "devDependencies": {
     "turbo": "^2.6.0"
-  }
+  },
+  "packageManager": "npm@10.8.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

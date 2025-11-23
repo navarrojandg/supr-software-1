@@ -1,0 +1,17 @@
+{
+  "name": "worker",
+  "devDependencies": {
+    "@repo/queues": "*",
+    "@repo/tsconfig": "*",
+    "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "dependencies": {
+    "bullmq": "^5.64.1",
+    "ioredis": "^5.8.2"
+  }
+}

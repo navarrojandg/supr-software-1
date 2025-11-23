@@ -1,0 +1,34 @@
+services:
+  redis:
+    container_name: redis
+    build:
+      context: .
+      dockerfile: ./apps/redis/Dockerfile
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - supr-network
+  arena:
+    container_name: arena
+    build:
+      context: .
+      dockerfile: ./apps/arena/Dockerfile
+    restart: always
+    ports:
+      - 4567:4567
+    networks:
+      - supr-network
+  worker:
+    container_name: worker
+    build:
+      context: .
+      dockerfile: ./apps/worker/Dockerfile
+    restart: always
+    ports:
+      - 4000:4000
+    networks:
+      - supr-network
+
+networks:
+  supr-network:

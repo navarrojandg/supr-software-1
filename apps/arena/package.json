@@ -1,0 +1,15 @@
+{
+  "name": "arena",
+  "scripts": {
+    "start": ""
+  },
+  "main": "./index.js",
+  "dependencies": {
+    "bull-arena": "^4.9.2",
+    "bullmq": "^5.64.1"
+  },
+  "devDependencies": {
+    "@repo/queues": "*",
+    "@repo/tsconfig": "*"
+  }
+}
