@@ -13,7 +13,7 @@ export async function withPage(
         ? "/usr/bin/chromium-browser"
         : "chromium-browser"),
     headless,
-    args: ["--no-sandbox"],
+    args: ["--no-sandbox", "--disable-gpu"],
   });
 
   let res;
@@ -25,6 +25,8 @@ export async function withPage(
     await (await browser.pages())[0]?.close();
 
     res = await callback(page);
+
+    await page.close();
   } catch (err) {
     console.error(err);
 

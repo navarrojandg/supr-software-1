@@ -1,4 +1,21 @@
 services:
+  db:
+    container_name: db
+    image: postgres:18
+    restart: always
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    networks:
+      - supr-network
+    volumes:
+      - db-data:/var/lib/postgresql
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+
   redis:
     container_name: redis
     build:
@@ -9,6 +26,7 @@ services:
       - ${REDIS_PORT}:${REDIS_PORT}
     networks:
       - supr-network
+
   arena:
     container_name: arena
     build:
@@ -24,12 +42,14 @@ services:
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=${REDIS_PORT}
+
   worker:
     container_name: worker
     build:
       context: .
       dockerfile: ./apps/worker/Dockerfile
     depends_on:
+      - db
       - redis
     restart: always
     ports:
@@ -37,8 +57,17 @@ services:
     networks:
       - supr-network
     environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+
       - REDIS_HOST=redis
       - REDIS_PORT=${REDIS_PORT}
 
 networks:
   supr-network:
+
+volumes:
+  db-data:

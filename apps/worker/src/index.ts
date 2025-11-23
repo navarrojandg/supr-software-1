@@ -2,12 +2,13 @@ import { Worker, Job } from "bullmq";
 
 import { QUEUES } from "@repo/queues";
 import redisClient from "./config/ioredis";
+import { refreshNflRoster } from "./espn";
 
 // Instantiate all the workers here
-const espnWorker = new Worker(
-  QUEUES.ESPN,
+const espnRefreshNflRostersWorker = new Worker(
+  QUEUES.ESPN_REFRESH_NFL_ROSTERS,
   async (job: Job) => {
-    console.log("job.data", job.data);
+    await refreshNflRoster(job.data);
 
     return;
   },

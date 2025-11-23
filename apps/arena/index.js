@@ -9,7 +9,7 @@ Arena({
   queues: [
     {
       type: "bullmq",
-      name: QUEUES.ESPN,
+      name: QUEUES.ESPN_REFRESH_NFL_ROSTERS,
       hostId: "WORKER",
       redis: {
         host: process.env.REDIS_HOST,

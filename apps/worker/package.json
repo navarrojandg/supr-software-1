@@ -1,6 +1,7 @@
 {
   "name": "worker",
   "devDependencies": {
+    "@repo/db": "*",
     "@repo/queues": "*",
     "@repo/tsconfig": "*",
     "typescript": "^5.9.3"
