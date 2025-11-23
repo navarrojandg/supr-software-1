@@ -6,7 +6,7 @@ services:
       dockerfile: ./apps/redis/Dockerfile
     restart: always
     ports:
-      - 6379:6379
+      - ${REDIS_PORT}:${REDIS_PORT}
     networks:
       - supr-network
   arena:
@@ -14,21 +14,31 @@ services:
     build:
       context: .
       dockerfile: ./apps/arena/Dockerfile
+    depends_on:
+      - redis
     restart: always
     ports:
       - 4567:4567
     networks:
       - supr-network
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=${REDIS_PORT}
   worker:
     container_name: worker
     build:
       context: .
       dockerfile: ./apps/worker/Dockerfile
+    depends_on:
+      - redis
     restart: always
     ports:
       - 4000:4000
     networks:
       - supr-network
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=${REDIS_PORT}
 
 networks:
   supr-network:
