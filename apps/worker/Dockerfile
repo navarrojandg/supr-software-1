@@ -44,6 +44,15 @@ RUN npm run build
 # ---
 FROM base AS runner
 
+RUN apk update && apk add --no-cache libc6-compat \
+    chromium \
+    chromium-chromedriver \
+    harfbuzz \
+    freetype \
+    ttf-freefont \
+    nss \
+    && rm -rf /var/cache/apk/*
+
 # Don't run production as root for security reasons
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 worker
