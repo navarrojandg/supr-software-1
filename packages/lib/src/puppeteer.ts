@@ -2,7 +2,9 @@
 import chromePaths from "chrome-paths";
 import puppeteer, { Page } from "puppeteer-core";
 
-export async function withPage(
+export type { Page as PuppeteerPage } from "puppeteer-core";
+
+export async function withPuppeteerPage(
   callback: (page: Page) => Promise<any>,
   { headless = true, autoCloseBrowser = true } = {}
 ) {

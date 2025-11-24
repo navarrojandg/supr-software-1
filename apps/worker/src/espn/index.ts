@@ -1,10 +1,10 @@
-import { withPage } from "../lib/puppeteer";
+import { withPuppeteerPage, PuppeteerPage } from "@repo/lib/puppeteer";
 
 import { athleteRepo } from "../config/db";
 
 export async function refreshNflRoster({ rosterUrl }: { rosterUrl: string }) {
   const roster = JSON.parse(
-    await withPage(async (page) => {
+    await withPuppeteerPage(async (page: PuppeteerPage) => {
       await page.goto(rosterUrl, { waitUntil: "load" });
 
       const result = await page.evaluate(

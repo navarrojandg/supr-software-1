@@ -2,7 +2,7 @@ require("dotenv").config();
 const Arena = require("bull-arena");
 const { Queue: BullMQ } = require("bullmq");
 
-const { QUEUES } = require("@repo/queues");
+const { QUEUES } = require("@repo/lib/queues");
 
 Arena({
   BullMQ: BullMQ,

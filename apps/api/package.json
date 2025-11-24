@@ -1,11 +1,16 @@
 {
-  "name": "@repo/queues",
+  "name": "api",
   "scripts": {
     "build": "tsc"
   },
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
   "devDependencies": {
+    "@repo/tsconfig": "*",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@repo/db": "*",
+    "@repo/lib": "*"
   }
 }
