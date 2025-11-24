@@ -1,19 +1,15 @@
 import {
   Entity,
-  CreateDateColumn,
-  UpdateDateColumn,
   Column,
   PrimaryGeneratedColumn,
   Unique,
-  JoinColumn,
-  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 
-import { Team } from "./Team";
-
-@Unique("uniq-source-athlete", ["source", "external_id"])
+@Unique("uniq-source-league-team", ["source", "league", "external_id"])
 @Entity()
-export class Athlete {
+export class Team {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -27,12 +23,14 @@ export class Athlete {
   name: string;
 
   @Column()
+  league: string;
+
+  @Column()
   external_id: string;
 
   @Column()
   source: string;
 
-  @ManyToOne(() => Team)
-  @JoinColumn({ name: "nfl_team_id" })
-  nfl_team: Team;
+  @Column()
+  abbrev: string;
 }

@@ -8,16 +8,17 @@ export enum QUEUES {
 
 export async function createRefreshNflRosterJob(
   redis: Redis,
-  queueName: QUEUES,
   data: { rosterUrl: string },
-  { jobOptions = {} }: { jobOptions: JobsOptions }
+  { jobOptions = {} as JobsOptions } = {}
 ) {
-  const queue = new Queue(queueName, { connection: redis });
+  const queue = new Queue(QUEUES.ESPN_REFRESH_NFL_ROSTERS, {
+    connection: redis,
+  });
 
   let res = null;
 
   try {
-    res = await queue.add(queueName, data, {
+    res = await queue.add(QUEUES.ESPN_REFRESH_NFL_ROSTERS, data, {
       removeOnComplete: 10,
       removeOnFail: 50,
       ...jobOptions,

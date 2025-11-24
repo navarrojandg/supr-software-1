@@ -5,6 +5,7 @@ dotenv.config();
 
 import { DataSource } from "typeorm";
 import { Athlete } from "./entity/Athlete";
+import { Team } from "./entity/Team";
 
 export const PostgresDataSource = new DataSource({
   type: "postgres",
@@ -15,7 +16,7 @@ export const PostgresDataSource = new DataSource({
   database: process.env.POSTGRES_DB,
   synchronize: true,
   logging: true,
-  entities: [Athlete],
+  entities: [Athlete, Team],
   subscribers: [],
   migrations: [],
 });

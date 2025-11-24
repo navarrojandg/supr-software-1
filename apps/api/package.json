@@ -1,16 +1,21 @@
 {
   "name": "api",
-  "scripts": {
-    "build": "tsc"
-  },
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
   "devDependencies": {
     "@repo/tsconfig": "*",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "dependencies": {
     "@repo/db": "*",
-    "@repo/lib": "*"
+    "@repo/lib": "*",
+    "dotenv": "^17.2.3",
+    "ioredis": "^5.8.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "--scripts--": "",
+    "_one-off-espn-create-refresh-nfl-roster-jobs-for-all": "RUN_FUNCTION=_one-off-espn-create-refresh-nfl-roster-jobs-for-all ts-node ./src/scripts/_one-off-espn-create-refresh-nfl-roster-jobs-for-all.ts"
   }
 }
